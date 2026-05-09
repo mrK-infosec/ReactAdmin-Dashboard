@@ -6,9 +6,7 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -21,7 +19,7 @@ body {
 .app-layout {
   display: flex;
   min-height: 100vh;
-  background-color: #f9fafb;
+  background-color: transparent; /* Use body background */
 }
 
 /* Scrollbar styling */
@@ -31,14 +29,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: rgba(2, 6, 23, 0.5); /* dark transparent */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: rgba(139, 92, 246, 0.3); /* primary color transparent */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: rgba(139, 92, 246, 0.7);
 }

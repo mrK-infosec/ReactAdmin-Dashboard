@@ -122,11 +122,11 @@ export const Sidebar = () => {
         ))}
       </nav>
       
-      <div className="sidebar-footer" style={{ marginTop: 'auto', padding: '1rem', borderTop: '1px solid #e5e7eb' }}>
+      <div className="sidebar-footer" style={{ marginTop: 'auto', padding: '1rem', borderTop: '1px solid var(--border-color)' }}>
         <button 
           onClick={handleLogout}
           className="nav-link"
-          style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: isSidebarOpen ? 'flex-start' : 'center' }}
+          style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--danger-color)', display: 'flex', alignItems: 'center', justifyContent: isSidebarOpen ? 'flex-start' : 'center' }}
           title={!isSidebarOpen ? "Logout" : undefined}
         >
           <span className="nav-icon"><LogOut size={20} /></span>

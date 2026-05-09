@@ -18,7 +18,7 @@ export const Header = () => {
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             aria-label="Toggle sidebar"
           >
-            <Menu size={24} color="#1f2937" />
+            <Menu size={24} color="currentColor" />
           </button>
         </div>
         
@@ -39,7 +39,7 @@ export const Header = () => {
                 className="profile-avatar"
               />
               <span className="user-name">{userName}</span>
-              <ChevronDown size={16} color="#64748b" />
+              <ChevronDown size={16} color="currentColor" />
             </button>
             
             {isProfileOpen && (
