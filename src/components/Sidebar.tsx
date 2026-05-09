@@ -1,6 +1,6 @@
 // Sidebar Navigation Component
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 import { 
   LayoutDashboard, 
@@ -10,12 +10,14 @@ import {
   Users, 
   ChevronDown,
   ChevronRight,
-  DollarSign
+  DollarSign,
+  LogOut
 } from "lucide-react";
 import "../styles/components.css";
 
 export const Sidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { isSidebarOpen } = useUser();
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({
     sales: true,
@@ -27,6 +29,16 @@ export const Sidebar = () => {
 
   const toggleMenu = (id: string) => {
     setOpenMenus(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch('http://localhost:5000/api/auth/logout', { method: 'POST' });
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+    localStorage.removeItem('userInfo');
+    navigate('/login');
   };
 
   const menuItems = [
@@ -109,6 +121,18 @@ export const Sidebar = () => {
           )
         ))}
       </nav>
+      
+      <div className="sidebar-footer" style={{ marginTop: 'auto', padding: '1rem', borderTop: '1px solid #e5e7eb' }}>
+        <button 
+          onClick={handleLogout}
+          className="nav-link"
+          style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: isSidebarOpen ? 'flex-start' : 'center' }}
+          title={!isSidebarOpen ? "Logout" : undefined}
+        >
+          <span className="nav-icon"><LogOut size={20} /></span>
+          {isSidebarOpen && <span className="nav-label" style={{ fontWeight: 500 }}>Logout</span>}
+        </button>
+      </div>
     </aside>
   );
 };
