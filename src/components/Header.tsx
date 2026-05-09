@@ -2,11 +2,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
-import { Menu, ChevronDown, Settings, LogOut } from "lucide-react";
+import { Menu, ChevronDown, Settings, LogOut, Sun, Moon } from "lucide-react";
 import "../styles/components.css";
 
 export const Header = () => {
-  const { userName, avatarUrl, isSidebarOpen, setIsSidebarOpen } = useUser();
+  const { userName, avatarUrl, isSidebarOpen, setIsSidebarOpen, theme, toggleTheme } = useUser();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   return (
@@ -28,6 +28,14 @@ export const Header = () => {
         </div>
         
         <div className="header-actions">
+          <button 
+            className="toggle-btn toggle-header" 
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            style={{ marginRight: '8px' }}
+          >
+            {theme === 'dark' ? <Sun size={20} color="currentColor" /> : <Moon size={20} color="currentColor" />}
+          </button>
           <div className="profile-container">
             <button 
               className="user-profile" 

@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-:root {
+:root, :root[data-theme="dark"] {
   /* Vibrant Premium Colors */
   --primary-color: #8b5cf6;
   --primary-dark: #7c3aed;
@@ -35,11 +35,43 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.4);
+
+  /* Gradients */
+  --gradient-purple: rgba(139, 92, 246, 0.15);
+  --gradient-green: rgba(16, 185, 129, 0.1);
+  --gradient-red: rgba(244, 63, 94, 0.1);
   
   /* Radii */
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-full: 9999px;
+}
+
+:root[data-theme="light"] {
+  --primary-color: #7c3aed;
+  --primary-dark: #6d28d9;
+  --primary-light: #8b5cf6;
+  --secondary-color: #f1f5f9;
+  
+  --dark-bg: #f8fafc; /* Light slate background */
+  --dark-bg-secondary: rgba(241, 245, 249, 0.6);
+  --white: rgba(255, 255, 255, 0.8);
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  
+  --border-color: rgba(0, 0, 0, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.3);
+
+  --gradient-purple: rgba(124, 58, 237, 0.08);
+  --gradient-green: rgba(16, 185, 129, 0.05);
+  --gradient-red: rgba(244, 63, 94, 0.05);
 }
 
 * {
@@ -63,11 +95,12 @@ body {
   background-color: var(--dark-bg);
   /* Premium animated gradient background */
   background-image: 
-    radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 50% 100%, rgba(244, 63, 94, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 15% 50%, var(--gradient-purple) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, var(--gradient-green) 0%, transparent 50%),
+    radial-gradient(circle at 50% 100%, var(--gradient-red) 0%, transparent 50%);
   background-attachment: fixed;
   background-size: 100% 100%;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 a {
@@ -78,7 +111,7 @@ a {
 
 a:hover {
   color: var(--primary-light);
-  text-shadow: 0 0 8px rgba(167, 139, 250, 0.5);
+  text-shadow: 0 0 8px var(--gradient-purple);
 }
 
 button {
@@ -91,7 +124,7 @@ select,
 textarea {
   font-family: inherit;
   font-size: inherit;
-  background-color: rgba(15, 23, 42, 0.6);
+  background-color: var(--glass-bg);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
