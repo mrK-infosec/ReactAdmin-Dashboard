@@ -6,9 +6,9 @@ dotenv.config();
 
 mongoose
   .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/dimond-script')
-  .then(() => console.log('Connected to MongoDB for Seeding'))
+  // .then(() => console.log('Connected to MongoDB for Seeding'))
   .catch((err) => {
-    console.error('Connection error', err);
+    // console.error('Connection error', err);
     process.exit(1);
   });
 
@@ -21,7 +21,7 @@ const importData = async () => {
     const adminExists = await User.findOne({ email: 'admin@dimondscript.com' });
     
     if (adminExists) {
-        console.log('Admin user already exists!');
+        // console.log('Admin user already exists!');
         process.exit();
     }
 
@@ -33,10 +33,10 @@ const importData = async () => {
     });
 
     await adminUser.save();
-    console.log('Admin User Seeded Successfully: admin@dimondscript.com / password123');
+    // console.log('Admin User Seeded Successfully: admin@dimondscript.com / password123');
     process.exit();
   } catch (error) {
-    console.error(`Error: ${error.message}`);
+    // console.error(`Error: ${error.message}`);
     process.exit(1);
   }
 };

@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import orderRoutes from './routes/orders.js';
-import authRoutes from './routes/auth.js';
+import cookieParser from 'cookie-parser';
+import authRoutes from './src/modules/auth/auth.routes.js';
 import newCategoryRoutes from './src/modules/categories/category.routes.js';
 import productRoutes from './routes/products.js';
 import userRoutes from './routes/users.js';
@@ -17,8 +18,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173', // Adjust in production
+  credentials: true
+}));
 app.use(express.json());
+app.use(cookieParser());
 
 // Routes
 app.use('/api/orders', orderRoutes);
@@ -32,7 +37,7 @@ app.use(errorHandler);
 
 // Start the server immediately
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  // console.log(`Server is running on port ${PORT}`);
 });
 
 // Database Connection
@@ -40,14 +45,14 @@ const connectDB = async () => {
   try {
     // Try to connect to local MongoDB first (fast timeout)
     await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/dimond-script', { serverSelectionTimeoutMS: 2000 });
-    console.log('Connected to Local MongoDB successfully');
+    // console.log('Connected to Local MongoDB successfully');
   } catch (err) {
-    console.log('Local MongoDB not found. Starting In-Memory Database...');
+    // console.log('Local MongoDB not found. Starting In-Memory Database...');
     try {
       const mongoServer = await MongoMemoryServer.create();
       const mongoUri = mongoServer.getUri();
       await mongoose.connect(mongoUri);
-      console.log('Connected to In-Memory MongoDB successfully! (Data will reset on restart)');
+      // console.log('Connected to In-Memory MongoDB successfully! (Data will reset on restart)');
       
       // Auto-seed admin user for testing
       const adminExists = await User.findOne({ email: 'admin@dimondscript.com' });
@@ -58,10 +63,10 @@ const connectDB = async () => {
           password: 'password123',
           role: 'admin',
         });
-        console.log('Test Admin Seeded: admin@dimondscript.com / password123');
+        // console.log('Test Admin Seeded: admin@dimondscript.com / password123');
       }
     } catch (memErr) {
-      console.error('Failed to start In-Memory Database', memErr);
+      // console.error('Failed to start In-Memory Database', memErr);
     }
   }
 };
